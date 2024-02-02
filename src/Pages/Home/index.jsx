@@ -1,5 +1,4 @@
 import Navbar from "./navbar/Navbar";
-import Card from 'react-bootstrap/Card';
 import imgLogo from '../../assets/logo.png';
 import './index.css'
 
@@ -8,8 +7,7 @@ function Home() {
         <>
             <body className="body-home">
                 <Navbar />
-                <div className="content-home">
-                <Card className="card-home">
+                <div className="card-home">
                     <img
                         alt=""
                         src={imgLogo}
@@ -17,8 +15,7 @@ function Home() {
                         height="30"
                         className="d-inline-block align-top img-card-home"
                     />{' '}
-                    <Card.Body className="text-card-home">Um novo jeito de viajar, com novas experiencias !</Card.Body>
-                </Card>
+                    <span className="text-card-home">Conte-nos suas histórias e suas novas experiencias !</span>
                 </div>
             </body>
         </>

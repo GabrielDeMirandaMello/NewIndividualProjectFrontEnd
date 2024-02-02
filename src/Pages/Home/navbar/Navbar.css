@@ -1,9 +1,42 @@
 .logo-home{
     color: #027500 !important;
 }
-.style-cadastro{
-    margin: 0 50px 0 0;
+.content-navbar{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-.img-navbar {
-    margin: 0 0 0 10px;
+
+.details-img{
+    width: 4%;
+    height: 4%;
+}
+.buttons-menu{
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.button-cadastro{
+    border-radius: 20px;
+    border: none;
+    width: 40%;
+}
+.button-entrar{
+    border-radius: 20px;
+    border: none;
+    width: 40%;
+}
+.button-cadastro:hover{
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 0px 10px;
+    width: 40%;
+}
+.button-entrar:hover{
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 0px 10px;
+    width: 40%;
 }
