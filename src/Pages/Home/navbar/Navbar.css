@@ -21,13 +21,15 @@
 }
 .button-cadastro{
     border-radius: 20px;
-    border: none;
+    border: 0.5px solid #000000;
     width: 40%;
+    background-color: #009501;
 }
 .button-entrar{
     border-radius: 20px;
-    border: none;
+    border: 0.5px solid #000000;
     width: 40%;
+    background-color: #009501;
 }
 .button-cadastro:hover{
     border-radius: 20px;
