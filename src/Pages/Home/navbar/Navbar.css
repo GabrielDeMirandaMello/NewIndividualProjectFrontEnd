@@ -7,11 +7,12 @@
     justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 20px;
+    font-family: 'poppins';
 }
 
 .details-img{
-    width: 4%;
-    height: 4%;
+    width: 20%;
+    height: auto;
 }
 .buttons-menu{
     width: 30%;

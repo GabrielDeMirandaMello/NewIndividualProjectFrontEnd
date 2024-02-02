@@ -3,6 +3,7 @@ body {
     height: 100vh;
     position: relative;
     background: linear-gradient(180deg, #00c500, #ceffc0) no-repeat;
+    font-family: 'poppins';
 }
 .body-home{
     padding: 0 100px 0 100px;
