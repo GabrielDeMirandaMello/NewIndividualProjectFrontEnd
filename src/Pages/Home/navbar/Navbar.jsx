@@ -1,6 +1,6 @@
 import React from 'react';
 import imgLogo from '../../../assets/logo.png';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import './Navbar.css'
 
 function NavBar() {
@@ -13,8 +13,8 @@ function NavBar() {
                 <span>History Travels</span>
                 </div>
                 <div className='buttons-menu'>
-                    <button className='button-cadastro'>Cadastro</button>
-                    <button className='button-entrar'>Entrar</button>
+                    <button className='button-cadastro' onClick={() => navigate('/singup')}>Cadastro</button>
+                    <button className='button-entrar' onClick={() => navigate('/singin')}>Entrar</button>
                 </div>
             </div>
         </>
