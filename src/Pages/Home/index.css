@@ -5,6 +5,10 @@ body {
     font-family: 'poppins';
 }
 
+body::-webkit-scrollbar{
+    display: none;
+}
+  
 .body-home {
     padding: 0 100px 0 100px;
 }

@@ -1,8 +1,12 @@
 .body-home-singin {
     height: 100vh;
+    padding: 0 100px 0 100px;
+}
+
+.container-form{
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .form {
