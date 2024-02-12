@@ -1,4 +1,4 @@
-import Navbar from "../Home/navbar/Navbar";
+import Navbar from '../../Components/navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import './index.css'
 import { BsFillPersonFill, BsEnvelopeAtFill, BsFillUnlockFill, BsTelephonePlusFill } from "react-icons/bs";

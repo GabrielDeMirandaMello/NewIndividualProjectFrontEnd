@@ -1,4 +1,4 @@
-import Navbar from "./navbar/Navbar";
+import Navbar from '../../Components/navbar/Navbar';
 import imgLogo from '../../assets/logo-G.svg';
 import { BsImages, BsFillHandThumbsUpFill, BsFillGeoFill } from "react-icons/bs";
 import './index.css'

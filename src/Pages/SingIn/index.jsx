@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.css'
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Home/navbar/Navbar";
+import Navbar from '../../Components/navbar/Navbar';
 import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 
 
