@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <>
             <body className="body-home-singin">
-                <Navbar />
+                <Navbar name='Sing In'/>
                 <div className='container-form'>
                     <form class="form">
                         <div class="flex-column">

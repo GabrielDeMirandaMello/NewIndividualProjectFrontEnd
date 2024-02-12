@@ -13,6 +13,7 @@
 .details-img{
     width: 20%;
     height: auto;
+    cursor: pointer;
 }
 .buttons-menu{
     width: 30%;

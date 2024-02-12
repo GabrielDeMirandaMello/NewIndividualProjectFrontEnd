@@ -7,7 +7,7 @@ function Home() {
     return (
         <>
             <body className="body-home">
-                <Navbar />
+                <Navbar name='Home'/>
                 <div className="card-home">
                     <span className="text-card-home">“Viajar é uma experiência transformadora que pode mudar sua vida. Não tenha medo de sair da sua zona de conforto e experimentar coisas novas.”</span>
                     <img
