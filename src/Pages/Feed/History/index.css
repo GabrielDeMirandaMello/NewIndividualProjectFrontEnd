@@ -16,3 +16,28 @@
     border: 1px solid black;
     padding: 1%;
 }
+.filter-story{
+    padding: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter-container-input{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border: 1px solid red;
+}
+.filter-container-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+.btn-search-story{
+    border-radius: 20px;
+    padding: 5px 15px 5px 15px;
+    border: none;
+    background-color: #009501;
+    color: #ffffff;
+}
