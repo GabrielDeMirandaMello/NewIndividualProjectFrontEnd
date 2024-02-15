@@ -5,7 +5,7 @@ import SingIn from "./Pages/SingIn/index.jsx";
 import SingUp from "./Pages/SingUp/index.jsx";
 import History from "./Pages/Feed/History/index.jsx";
 import MyHistory from "./Pages/Feed/MyHistory/index.jsx";
-import Profile from "./Pages/Feed/Profile/Index.jsx";
+import Profile from "./Pages/Feed/Profile/index.jsx";
 
 function routes() {
 

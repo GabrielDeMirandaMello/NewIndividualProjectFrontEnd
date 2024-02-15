@@ -11,17 +11,19 @@ export default function History() {
                 <div className="container-feeds">
                     <div className="filter-story">
                         <div className="filter-container-input">
-                            <label htmlFor="">Filter</label>
-                            <input type="text" />
+                            <label htmlFor="">Filter by Term</label>
+                            <input className="input-filter-story" type="text" />
                         </div>
                         <div className="filter-container-button">
                             <button className="btn-search-story">
-                                <BsFillSearchHeartFill /> Buscar
+                                <BsFillSearchHeartFill /> Search
                             </button>
                         </div>
                     </div>
                     <div className="feed-story">
-                        feed das historias
+                        <div>Nome do Usuario</div>
+                        <div>Titulo da Historia</div>
+                        <div>Campo de Descrição</div>
                     </div>
                 </div>
             </div>
