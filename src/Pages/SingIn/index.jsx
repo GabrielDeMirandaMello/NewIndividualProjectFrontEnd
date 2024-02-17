@@ -15,6 +15,8 @@ export default function Home() {
             setView("password");
         }
     }
+
+    
     return (
         <>
             <body className="body-home-singin">

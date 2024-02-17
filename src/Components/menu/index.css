@@ -1,7 +1,7 @@
 .container-navigation{
     display: flex;
     justify-content: space-around;
-    background-color: white;
+    background-color: #fff;
     align-items: flex-start;
     flex-direction: column;
     padding-left: 20px;
@@ -21,7 +21,7 @@
 }
 .btn-menu{
     outline: none;
-    border-radius: 20px;
+    border-radius: 10px;
     height: 30px;
     padding-right: 20px;
     padding-left: 10px;
@@ -32,4 +32,5 @@
 .name-user{
     padding-left: 10px;
     color: #009501;
+    font-weight: 900;
 }

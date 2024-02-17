@@ -1,0 +1,56 @@
+.tittle-profile{
+    display: flex;
+    justify-content: center;
+    margin: 3%;
+    font-family: 'poppins';
+    font-weight: 900;
+    font-size: larger;
+}
+
+.container-data-user{
+    height: fit-content;
+    padding: 2%;
+}
+.input-alter-data{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.input-text{
+    width: 90%;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+}
+.input-text::placeholder{
+    color: black;
+}
+.container-btn-save{
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+    height: fit-content;
+    margin-left: 50%;
+}
+.icon-profile{
+    z-index: 1;
+    width: 20px;
+    height: auto;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.icon-profile:hover{
+    z-index: 1;
+    width: 20px;
+    height: auto;
+    margin-right: 20px;
+    cursor: pointer;
+    color: #00c500;
+}
