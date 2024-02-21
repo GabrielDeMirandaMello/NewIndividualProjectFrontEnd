@@ -18,31 +18,31 @@ function Home() {
                     />{' '}
                 </div>
                 <div className="container-cards">
-                    <div class="parent">
-                        <div class="card">
-                            <div class="glass"></div>
-                            <div class="content">
-                                <span class="title"><BsImages /></span>
-                                <span class="text">Post Suas Viagens</span>
+                    <div className="parent">
+                        <div className="card">
+                            <div className="glass"></div>
+                            <div className="content">
+                                <span className="title"><BsImages /></span>
+                                <span className="text">Post Suas Viagens</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="parent">
-                        <div class="card">
-                            <div class="glass"></div>
-                            <div class="content">
-                                <span class="title"><BsFillHandThumbsUpFill /></span>
-                                <span class="text">Curta Outras Viagens</span>
+                    <div className="parent">
+                        <div className="card">
+                            <div className="glass"></div>
+                            <div className="content">
+                                <span className="title"><BsFillHandThumbsUpFill /></span>
+                                <span className="text">Curta Outras Viagens</span>
                             </div>
                         </div>
                     </div>
-                    <div class="parent">
-                        <div class="card">
-                            <div class="glass"></div>
-                            <div class="content">
-                                <span class="title"><BsFillGeoFill /></span>
-                                <span class="text">Conheça novos Lugares</span>
+                    <div className="parent">
+                        <div className="card">
+                            <div className="glass"></div>
+                            <div className="content">
+                                <span className="title"><BsFillGeoFill /></span>
+                                <span className="text">Conheça novos Lugares</span>
                             </div>
                         </div>
                     </div>

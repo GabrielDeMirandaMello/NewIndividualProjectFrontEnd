@@ -14,10 +14,10 @@ function NavBar(props) {
                 <span onClick={() => navigate('/')} style={{cursor:'pointer'}}>History Travels</span>
                 </div>
                 <div className='buttons-menu'>
-                    {props.name === 'Sing In' && <Button color='white' name='Sing In' navi='/singin'/>}
-                    {props.name !== 'Sing In' && <Button color='black' name='Sing In' navi='/singin'/>}
-                    {props.name === 'Sing Up' && <Button color='white' name='Sing Up' navi='/singup'/>}
-                    {props.name !== 'Sing Up' && <Button color='black' name='Sing Up' navi='/singup'/>}
+                    {props.name === 'Sign In' && <Button color='white' name='Sign In' navi='/singin'/>}
+                    {props.name !== 'Sign In' && <Button color='black' name='Sign In' navi='/singin'/>}
+                    {props.name === 'Sign Up' && <Button color='white' name='Sign Up' navi='/singup'/>}
+                    {props.name !== 'Sign Up' && <Button color='black' name='Sign Up' navi='/singup'/>}
                 </div>
             </div>
         </>
