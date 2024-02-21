@@ -9,7 +9,11 @@ export default function Profile() {
     const [disablePhone, setDisablePhone] = useState(true);
     const [disableMonth, setDisableMonth] = useState(true);
     const [disableCompany, setDisableCompany] = useState(true);
-
+    const [nameUser, setNameUser] = useState(sessionStorage.getItem("NAME"));
+    const [emailUser, setEmailUser] = useState(sessionStorage.getItem("EMAIL"));
+    const [phoneUser, setPhoneUser] = useState(sessionStorage.getItem("PHONE"));
+    const [restMonthUser, setRestMonthUser] = useState(sessionStorage.getItem("REST MONTH"));
+    const [favoriteCompanyUser, setFavoriteCompanyUser] = useState(sessionStorage.getItem("FAVORITE COMPANY"));
 
     const handleToggleDisabled = (props) => {
         switch (props) {
@@ -31,6 +35,22 @@ export default function Profile() {
             default:
                 break;
         }};
+
+    function GetNameUser(event) {
+        setNameUser(event.target.value);
+    }
+    function GetEmailUser(event) {
+        setEmailUser(event.target.value);
+    }
+    function GetPhoneUser(event) {
+        setPhoneUser(event.target.value);
+    }
+    function GetRestMonthUser(event) {
+        setRestMonthUser(event.target.value);
+    }
+    function GetFavoriteCompanyUser(event) {
+        setFavoriteCompanyUser(event.target.value);
+    }
     return (
         <>
             <div className="body-home-story">
@@ -39,23 +59,23 @@ export default function Profile() {
                     <div className="tittle-profile">Meus Dados</div>
                     <div className="container-data-user">
                         <div className="input-alter-data">
-                            <input className="input-text" type="text" disabled={disableName} placeholder="Gabriel Mello" />
+                            <input value={nameUser} onChange={GetNameUser} className="input-text" type="text" disabled={disableName}/>
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('name')}/>
                         </div>
                         <div className="input-alter-data">
-                            <input className="input-text" type="text" disabled={disableEmail} placeholder="GabrielMello9@Gamil.com" />
+                            <input value={emailUser} onChange={GetEmailUser} className="input-text" type="text" disabled={disableEmail}/>
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('email')}/>
                         </div>
                         <div className="input-alter-data">
-                            <input className="input-text" type="text" disabled={disablePhone} placeholder="11976139421" />
+                            <input value={phoneUser} onChange={GetPhoneUser} className="input-text" type="text" disabled={disablePhone}/>
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('phone')}/>
                         </div>
                         <div className="input-alter-data">
-                            <input className="input-text" type="text" disabled={disableMonth} placeholder="Dezembro" />
+                            <input value={restMonthUser} onChange={GetRestMonthUser} className="input-text" type="text" disabled={disableMonth}/>
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('month')}/>
                         </div>
                         <div className="input-alter-data">
-                            <input className="input-text" type="text" disabled={disableCompany} placeholder="Meus Amigos" />
+                            <input value={favoriteCompanyUser} onChange={GetFavoriteCompanyUser} className="input-text" type="text" disabled={disableCompany}/>
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('company')}/>
                         </div>
                         <div className="container-btn-save">

@@ -48,6 +48,28 @@ export default function Home() {
                     icon: "success",
                     title: "Login realizado !"
                 });
+                const token = sessionStorage.getItem("TOKEN")
+                try {
+                    const partesToken = token.split('.');
+                    const payloadBase64 = partesToken[1];
+                    const payloadDecodificado = JSON.parse(atob(payloadBase64));
+                    sessionStorage.setItem(("ID"), payloadDecodificado.id);
+                } catch (error) {
+                    console.error('Erro ao decodificar o token:', error);
+                }
+                await axios.get(`http://localhost:8080/api/users/${sessionStorage.getItem("ID")}`,  {
+                    headers: {
+                      authorization: `Bearer ${token}`,
+                    },
+                  })
+                .then(response => {
+                    sessionStorage.setItem("NAME", response.data.name)
+                    sessionStorage.setItem("EMAIL", response.data.email)
+                    sessionStorage.setItem("PHONE", response.data.phone)
+                    sessionStorage.setItem("REST MONTH", response.data.restMonth)
+                    sessionStorage.setItem("FAVORITE COMPANY", response.data.favoriteCompany)
+                })
+                .catch(error => console.log(error.response));
                 navigate("/history")
             }
         }).catch(error => {

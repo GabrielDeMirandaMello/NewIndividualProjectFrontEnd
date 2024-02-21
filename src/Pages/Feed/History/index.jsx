@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "../../../Components/menu";
+import { useNavigate } from "react-router-dom";
 import './index.css'
 import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill } from "react-icons/bs";
+import axios from "axios";
 
 export default function History() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = sessionStorage.getItem("TOKEN")
+        if (token === null) {
+            navigate('/singin')
+        }
+    });
+
+
     return (
         <>
             <div className="body-home-story">
-                <Menu name='history'/>
+                <Menu name='history' />
                 <div className="container-feeds">
                     <div className="filter-story">
                         <div className="filter-container-input">
@@ -28,33 +39,33 @@ export default function History() {
                             <div className="user-story">Gabriel de Miranda Mello</div>
                             <div className="tittle-story">Titulo da Historia</div>
                             <div className="description-story">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             </div>
                             <div className="like-story">
                                 <span className="quantity-like">45</span>
-                                <BsFillChatHeartFill className="like"/>
+                                <BsFillChatHeartFill className="like" />
                             </div>
                         </div>
                         <div className="card-story">
                             <div className="user-story">Gabriel de Miranda Mello</div>
                             <div className="tittle-story">Titulo da Historia</div>
                             <div className="description-story">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             </div>
                             <div className="like-story">
                                 <span className="quantity-like">45</span>
-                                <BsFillChatHeartFill className="like"/>
+                                <BsFillChatHeartFill className="like" />
                             </div>
                         </div>
                         <div className="card-story">
                             <div className="user-story">Gabriel de Miranda Mello</div>
                             <div className="tittle-story">Titulo da Historia</div>
                             <div className="description-story">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             </div>
                             <div className="like-story">
                                 <span className="quantity-like">45</span>
-                                <BsFillChatHeartFill className="like"/>
+                                <BsFillChatHeartFill className="like" />
                             </div>
                         </div>
                     </div>
