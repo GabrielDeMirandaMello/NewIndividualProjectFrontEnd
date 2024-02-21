@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from '../../Components/navbar/Navbar';
 import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 
 export default function Home() {
@@ -18,26 +19,58 @@ export default function Home() {
             setView("password");
         }
     }
-
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
     async function SignIn() {
-        let headersList = {
-            "Content-Type": "application/json" 
-           }
-           
-           let bodyContent = JSON.stringify({
-               "email":"GabrielMello@gmail.com",
-               "password":"GabrielMello@1234"
-           });
-           
-           let reqOptions = {
-             url: "http://localhost:8080/api/users/login",
-             method: "POST",
-             headers: headersList,
-             data: bodyContent,
-           }
-           console.log(reqOptions)
-           let response = await axios.request(reqOptions);
-           console.log(response.data);
+
+        const headersList = {
+            "Content-Type": "application/json",
+        }
+        await axios.post("http://localhost:8080/api/users/login",
+            {
+                email: email,
+                password: password
+            },
+            headersList
+        ).then(async response => {
+            if (response.status === 200) {
+                sessionStorage.setItem("TOKEN", response.data.token)
+                await Toast.fire({
+                    icon: "success",
+                    title: "Login realizado !"
+                });
+                navigate("/history")
+            }
+        }).catch(error => {
+            if (error.code !== "ERR_NETWORK") {
+                if (error.response.status === 403) {
+                    Toast.fire({
+                        icon: "error",
+                        title: "Senha ou Email incorreto !"
+                    });
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: "Houve um problema ao realizar o Login !"
+                    });
+                }
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: "Tente realizar login mais tarde !"
+                });
+            }
+        }
+        )
     }
 
     function EmailUser(event) {
