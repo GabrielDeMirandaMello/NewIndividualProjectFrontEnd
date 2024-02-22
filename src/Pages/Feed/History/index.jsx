@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import './index.css'
 import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill } from "react-icons/bs";
-import axios from "axios";
+import './index.css'
+import Modal from '../../../Components/Modal/modal';
+
 
 export default function History() {
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         const token = sessionStorage.getItem("TOKEN")
         if (token === null) {
             navigate('/singin')
         }
     });
-
+    function ActionModal() {
+        setShowModal(!showModal);
+    }
 
     return (
         <>
@@ -29,7 +33,7 @@ export default function History() {
                             <button className="btn-search-story">
                                 <BsFillSearchHeartFill /> Search
                             </button>
-                            <button className="btn-search-story">
+                            <button onClick={ActionModal} className="btn-search-story">
                                 <BsFillPlusCircleFill /> Story
                             </button>
                         </div>
@@ -69,8 +73,9 @@ export default function History() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
+            <Modal isOpen={showModal}/>
         </>
     )
 }
