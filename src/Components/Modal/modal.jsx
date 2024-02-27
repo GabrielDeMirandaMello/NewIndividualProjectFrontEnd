@@ -3,13 +3,11 @@ import './modal.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { BsFillXCircleFill } from "react-icons/bs";
+import { TOKEN, USER_ID, USER_NAME, API_URL } from "../../Data/Constants";
 
 export default function Modal(isOpen) {
     const [titleStory, setTittleStory] = useState();
     const [descriptionStory, setDescriptionStory] = useState();
-    const [idUser] = useState(sessionStorage.getItem("ID"));
-    const [nameUser] = useState(sessionStorage.getItem("NAME"));
-    const token = sessionStorage.getItem("TOKEN")
     function GetTittle(event) {
         setTittleStory(event.target.value);
     }
@@ -30,16 +28,15 @@ export default function Modal(isOpen) {
     });
 
     async function SaveStory() {
-        console.log(token);
-        await axios.post(`http://localhost:8080/api/history/create/${idUser}`, {
+        await axios.post(`${API_URL}/api/history/create/${USER_ID}`, {
             title: titleStory,
             description: descriptionStory,
             comment: "",
             likeCount: 0,
-            nameUser: nameUser
+            nameUser: USER_NAME
         },{
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             }
         })
             .then(async response => {

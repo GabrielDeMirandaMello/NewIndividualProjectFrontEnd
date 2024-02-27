@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BsFillSearchHeartFill, BsFillChatHeartFill, BsCardList } from "react-icons/bs";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { TOKEN, USER_NAME, API_URL } from "../../../Data/Constants";
 
 export default function MyHistory() {
     const navigate = useNavigate();
@@ -12,9 +13,8 @@ export default function MyHistory() {
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [textGet, setTextGet] = useState("")
-    const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
-        if (token === null) {
+        if (TOKEN === null) {
             navigate('/singin')
         }
     });
@@ -48,9 +48,9 @@ export default function MyHistory() {
     }
 
     async function FindStory() {
-        await axios.get(`http://localhost:8080/api/history/${sessionStorage.getItem("NAME")}/${filterStory}/${textGet}`, {
+        await axios.get(`${API_URL}/api/history/${USER_NAME}/${filterStory}/${textGet}`, {
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             },
         })
             .then(response => {
@@ -66,9 +66,9 @@ export default function MyHistory() {
 
     async function RenderStorys() {
 
-        await axios.get(`http://localhost:8080/api/history/public/name/${sessionStorage.getItem("NAME")}`, {
+        await axios.get(`${API_URL}/api/history/public/name/${USER_NAME}`, {
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             },
         })
             .then(response => {

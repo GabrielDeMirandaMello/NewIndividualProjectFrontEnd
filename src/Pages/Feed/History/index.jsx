@@ -6,6 +6,7 @@ import './index.css'
 import Modal from '../../../Components/Modal/modal';
 import axios from "axios";
 import Swal from "sweetalert2";
+import { TOKEN, API_URL } from "../../../Data/Constants";
 
 
 export default function History() {
@@ -18,9 +19,8 @@ export default function History() {
     const [listOfStory, setListOfStory] = useState([]);
     const [likeded, setLikeded] = useState(false)
     const [textGet, setTextGet] = useState("")
-    const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
-        if (token === null) {
+        if (TOKEN === null) {
             navigate('/singin')
         }
     });
@@ -65,9 +65,9 @@ export default function History() {
     }
 
     async function FindStory() {
-        await axios.get(`http://localhost:8080/api/history/public/${filterStory}/${textGet}`, {
+        await axios.get(`${API_URL}/api/history/public/${filterStory}/${textGet}`, {
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             },
         })
             .then(response => {
@@ -82,9 +82,9 @@ export default function History() {
 
     async function RenderStorys() {
 
-        await axios.get(`http://localhost:8080/api/history/all`, {
+        await axios.get(`${API_URL}/api/history/all`, {
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             },
         })
             .then(response => {
@@ -95,9 +95,9 @@ export default function History() {
 
     function Liked(idStory) {
         if (!likeded) {
-            axios.put(`http://localhost:8080/api/history/disliked/${idStory}`, {
+            axios.put(`${API_URL}/api/history/disliked/${idStory}`, {
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${TOKEN}`,
             },
         })
             .then(response => {
@@ -107,9 +107,9 @@ export default function History() {
             })
             .catch(error => console.log(error.response));
         } else {
-            axios.put(`http://localhost:8080/api/history/like/` + idStory, {
+            axios.put(`${API_URL}/api/history/like/` + idStory, {
                 headers: {
-                    authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${TOKEN}`,
                 },
             })
                 .then(response => {
@@ -179,7 +179,7 @@ export default function History() {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={showModal} bearer={token}/>
+            <Modal isOpen={showModal} />
         </>
     )
 }
