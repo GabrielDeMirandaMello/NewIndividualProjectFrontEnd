@@ -3,6 +3,7 @@ import imgLogo from '../../assets/logo-G.svg';
 import { BsImages, BsFillHandThumbsUpFill, BsFillGeoFill } from "react-icons/bs";
 import './index.css';
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react"
 
 function Home() {
     return (
@@ -52,6 +53,7 @@ function Home() {
                     <span>Todos os Direitos Reservados!</span>
                 </div>
                 <SpeedInsights />
+                <Analytics />
             </body>
         </>
     )
