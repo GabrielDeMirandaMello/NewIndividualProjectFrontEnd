@@ -34,7 +34,8 @@ export default function Profile() {
                 break;
             default:
                 break;
-        }};
+        }
+    };
 
     function GetNameUser(event) {
         setNameUser(event.target.value);
@@ -58,25 +59,31 @@ export default function Profile() {
                 <div className="container-feeds">
                     <div className="tittle-profile">Meus Dados</div>
                     <div className="container-data-user">
+                        <label className="label-info-user">Name</label>
                         <div className="input-alter-data">
-                            <input value={nameUser} onChange={GetNameUser} className="input-text" type="text" disabled={disableName}/>
-                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('name')}/>
+
+                            <input value={nameUser} onChange={GetNameUser} className="input-text" type="text" disabled={disableName} />
+                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('name')} />
                         </div>
+                        <label className="label-info-user">Email</label>
                         <div className="input-alter-data">
-                            <input value={emailUser} onChange={GetEmailUser} className="input-text" type="text" disabled={disableEmail}/>
-                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('email')}/>
+                            <input value={emailUser} onChange={GetEmailUser} className="input-text" type="text" disabled={disableEmail} />
+                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('email')} />
                         </div>
+                        <label className="label-info-user">Phone</label>
                         <div className="input-alter-data">
-                            <input value={phoneUser} onChange={GetPhoneUser} className="input-text" type="text" disabled={disablePhone}/>
-                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('phone')}/>
+                            <input value={phoneUser} onChange={GetPhoneUser} className="input-text" type="text" disabled={disablePhone} />
+                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('phone')} />
                         </div>
+                        <label className="label-info-user">Rest Month</label>
                         <div className="input-alter-data">
-                            <input value={restMonthUser} onChange={GetRestMonthUser} className="input-text" type="text" disabled={disableMonth}/>
-                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('month')}/>
+                            <input value={restMonthUser} onChange={GetRestMonthUser} className="input-text" type="text" disabled={disableMonth} />
+                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('month')} />
                         </div>
+                        <label className="label-info-user">Favorite Company</label>
                         <div className="input-alter-data">
-                            <input value={favoriteCompanyUser} onChange={GetFavoriteCompanyUser} className="input-text" type="text" disabled={disableCompany}/>
-                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('company')}/>
+                            <input value={favoriteCompanyUser} onChange={GetFavoriteCompanyUser} className="input-text" type="text" disabled={disableCompany} />
+                            <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('company')} />
                         </div>
                         <div className="container-btn-save">
                             <button className="btn-search-story">Salvar</button>

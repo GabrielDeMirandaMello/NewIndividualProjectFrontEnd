@@ -23,7 +23,7 @@ function Home() {
                             <div className="glass"></div>
                             <div className="content">
                                 <span className="title"><BsImages /></span>
-                                <span className="text">Post Suas Viagens</span>
+                                <span >Post Suas Viagens</span>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@ function Home() {
                             <div className="glass"></div>
                             <div className="content">
                                 <span className="title"><BsFillHandThumbsUpFill /></span>
-                                <span className="text">Curta Outras Viagens</span>
+                                <span >Curta Outras Viagens</span>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ function Home() {
                             <div className="glass"></div>
                             <div className="content">
                                 <span className="title"><BsFillGeoFill /></span>
-                                <span className="text">Conheça novos Lugares</span>
+                                <span >Conheça novos Lugares</span>
                             </div>
                         </div>
                     </div>

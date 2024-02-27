@@ -1,6 +1,6 @@
 .body-home-singup {
-    height: auto;
+    height: 100vh;
     padding: 0 100px 0 100px;
-    background: linear-gradient(180deg, #ceffc0, #00c500) no-repeat;
+    background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
     font-family: 'poppins';
 }

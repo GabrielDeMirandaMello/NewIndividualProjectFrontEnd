@@ -1,16 +1,17 @@
 .container-navigation{
     display: flex;
     justify-content: space-around;
-    background-color: #fff;
+    background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
     align-items: flex-start;
     flex-direction: column;
-    padding-left: 20px;
-    height: 90vh;
-    width: 13vw;
-    border-radius: 0px 20px 20px 0px;
-    box-shadow: 0px 0px 20px;
+    padding-left: 30px;
+    height: 96vh;
+    width: 12vw;
+    border-radius: 0 0 15px 0;
+    box-shadow: 0 0 20px 2px;
     font-family: 'poppins';
     font-size: 16px;
+    background-color: inherit;
 }
 .itens-menu{
     display: flex;
@@ -22,7 +23,12 @@
 .btn-menu{
     outline: none;
     border-radius: 10px;
-    height: 30px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
     padding-right: 20px;
     padding-left: 10px;
     border: none;
@@ -30,11 +36,14 @@
     background-color: #ffffff;
 }
 .name-user{
-    
-    padding: 10px 0 10px 10px;
+    border-bottom: 2px solid black;
+    padding: 10px;
     width: 100%;
-    border-radius: 10px;
     color: #009501;
     font-weight: 900;
     text-shadow: 0.5px 0.5px 1px #000;
+}
+.icon-menu-navigation{
+    height: 70%;
+    width: auto;
 }
