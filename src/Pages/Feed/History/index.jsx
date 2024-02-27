@@ -19,8 +19,9 @@ export default function History() {
     const [listOfStory, setListOfStory] = useState([]);
     const [likeded, setLikeded] = useState(false)
     const [textGet, setTextGet] = useState("")
+    const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
-        if (TOKEN === null) {
+        if (token === null) {
             navigate('/singin')
         }
     });
@@ -95,7 +96,7 @@ export default function History() {
 
     function Liked(idStory) {
         if (!likeded) {
-            axios.put(`${API_URL}/api/history/disliked/${idStory}`, {
+            axios.put(`${API_URL}/api/history/disliked?id='${idStory}'`, {
             headers: {
                 authorization: `Bearer ${TOKEN}`,
             },
@@ -107,7 +108,7 @@ export default function History() {
             })
             .catch(error => console.log(error.response));
         } else {
-            axios.put(`${API_URL}/api/history/like/` + idStory, {
+            axios.put(`${API_URL}/api/history/like?id='${idStory}'`, {
                 headers: {
                     authorization: `Bearer ${TOKEN}`,
                 },
