@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import './index.css';
 import { useNavigate } from "react-router-dom";
 import { MdAutoStories, MdFormatAlignRight, MdManageAccounts, MdOutlineExitToApp } from "react-icons/md";
-import { USER_NAME } from "../../Data/Constants"
 
 export default function Menu(props) {
     const [name, setName] = useState('');
     useEffect(() => {
-        setName(USER_NAME)
+        setName(sessionStorage.getItem("NAME"))
     }, [name])
     const navigate = useNavigate();
     async function Logout() {
