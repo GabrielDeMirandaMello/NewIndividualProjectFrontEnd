@@ -5,7 +5,7 @@ import Navbar from '../../Components/navbar/Navbar';
 import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import { API_URL } from "../../../Data/Constants";
+import { API_URL } from "../../Data/Constants";
 
 
 export default function Home() {

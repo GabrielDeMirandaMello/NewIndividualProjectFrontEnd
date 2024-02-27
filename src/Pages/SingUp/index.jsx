@@ -5,7 +5,7 @@ import './index.css'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { BsFillPersonFill, BsEnvelopeAtFill, BsFillUnlockFill, BsTelephonePlusFill, BsLuggageFill, BsFillPeopleFill } from "react-icons/bs";
-import { API_URL } from "../../../Data/Constants";
+import { API_URL } from '../../Data/Constants';
 
 export default function Home() {
     const [view, setView] = useState("password");
