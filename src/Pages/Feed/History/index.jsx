@@ -85,7 +85,7 @@ export default function History() {
 
         await axios.get(`${API_URL}/api/history/all`, {
             headers: {
-                authorization: `Bearer ${TOKEN}`,
+                authorization: `Bearer ${token}`,
             },
         })
             .then(response => {
