@@ -5,6 +5,7 @@ import './index.css'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { BsFillPersonFill, BsEnvelopeAtFill, BsFillUnlockFill, BsTelephonePlusFill, BsLuggageFill, BsFillPeopleFill } from "react-icons/bs";
+import { API_URL } from "../../../Data/Constants";
 
 export default function Home() {
     const [view, setView] = useState("password");
@@ -102,7 +103,7 @@ export default function Home() {
                 "Content-Type": "application/json",
             }
             await axios.post(
-                "http://localhost:8080/api/users/register",
+                `${API_URL}/api/users/register`,
                 {
                     name: nameUser,
                     email: emailUser,

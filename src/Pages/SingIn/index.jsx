@@ -5,6 +5,7 @@ import Navbar from '../../Components/navbar/Navbar';
 import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { API_URL } from "../../../Data/Constants";
 
 
 export default function Home() {
@@ -35,7 +36,7 @@ export default function Home() {
         const headersList = {
             "Content-Type": "application/json",
         }
-        await axios.post("http://localhost:8080/api/users/login",
+        await axios.post(`${API_URL}/api/users/login`,
             {
                 email: email,
                 password: password
@@ -57,7 +58,7 @@ export default function Home() {
                 } catch (error) {
                     console.error('Erro ao decodificar o token:', error);
                 }
-                await axios.get(`http://localhost:8080/api/users/${sessionStorage.getItem("ID")}`,  {
+                await axios.get(`${API_URL}/api/users/${sessionStorage.getItem("ID")}`,  {
                     headers: {
                       authorization: `Bearer ${token}`,
                     },
