@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import Menu from "../../../Components/menu";
 import './index.css'
 import { BsPencilFill } from "react-icons/bs";
+import axios from "axios";
+import { TOKEN, USER_ID, USER_NAME, USER_EMAIL, USER_PHONE, USER_REST_MONTH, USER_FAVORITE_COMPANY, API_URL } from "../../../Data/Constants";
 
 export default function Profile() {
     const [disableName, setDisableName] = useState(true);
@@ -9,11 +11,12 @@ export default function Profile() {
     const [disablePhone, setDisablePhone] = useState(true);
     const [disableMonth, setDisableMonth] = useState(true);
     const [disableCompany, setDisableCompany] = useState(true);
-    const [nameUser, setNameUser] = useState(sessionStorage.getItem("NAME"));
-    const [emailUser, setEmailUser] = useState(sessionStorage.getItem("EMAIL"));
-    const [phoneUser, setPhoneUser] = useState(sessionStorage.getItem("PHONE"));
-    const [restMonthUser, setRestMonthUser] = useState(sessionStorage.getItem("REST MONTH"));
-    const [favoriteCompanyUser, setFavoriteCompanyUser] = useState(sessionStorage.getItem("FAVORITE COMPANY"));
+    const [idUser] = useState(USER_ID)
+    const [nameUser, setNameUser] = useState(USER_NAME);
+    const [emailUser, setEmailUser] = useState(USER_EMAIL);
+    const [phoneUser, setPhoneUser] = useState(USER_PHONE);
+    const [restMonthUser, setRestMonthUser] = useState(USER_REST_MONTH);
+    const [favoriteCompanyUser, setFavoriteCompanyUser] = useState(USER_FAVORITE_COMPANY);
 
     const handleToggleDisabled = (props) => {
         switch (props) {
@@ -52,6 +55,29 @@ export default function Profile() {
     function GetFavoriteCompanyUser(event) {
         setFavoriteCompanyUser(event.target.value);
     }
+
+    async function UpdateDataUser() {
+
+        await axios.put(`${API_URL}/api/users/update`, {
+            id: idUser,
+            name: nameUser,
+            email: emailUser,
+            phone: phoneUser,
+            restMonth: restMonthUser,
+            favoriteCompany: favoriteCompanyUser
+        }, {
+            headers: {
+                authorization: `Bearer ${TOKEN}`,
+            },
+        }).then(response => {
+            setNameUser(response.data.name);
+            setEmailUser(response.data.email);
+            setPhoneUser(response.data.phone);
+            setRestMonthUser(response.data.restMonth);
+            setFavoriteCompanyUser(response.data.favoriteCompany);
+        })
+        .catch(error => console.log(error.response))
+    }
     return (
         <>
             <div className="body-home-story">
@@ -86,7 +112,7 @@ export default function Profile() {
                             <BsPencilFill className="icon-profile" onClick={() => handleToggleDisabled('company')} />
                         </div>
                         <div className="container-btn-save">
-                            <button className="btn-search-story">Salvar</button>
+                            <button className="btn-search-story" onClick={UpdateDataUser}>Salvar</button>
                         </div>
                     </div>
                 </div>
