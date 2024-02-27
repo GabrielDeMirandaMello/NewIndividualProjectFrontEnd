@@ -1,7 +1,8 @@
 import Navbar from '../../Components/navbar/Navbar';
 import imgLogo from '../../assets/logo-G.svg';
 import { BsImages, BsFillHandThumbsUpFill, BsFillGeoFill } from "react-icons/bs";
-import './index.css'
+import './index.css';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function Home() {
     return (
@@ -50,6 +51,7 @@ function Home() {
                 <div className="footer-home">
                     <span>Todos os Direitos Reservados!</span>
                 </div>
+                <SpeedInsights />
             </body>
         </>
     )
