@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react"
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
+import { BsFillSearchHeartFill, BsFillChatHeartFill, BsCardList } from "react-icons/bs";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 export default function MyHistory() {
     const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
-    const [isCheckedUserName, setIsCheckedUsername] = useState(true);
     const [isCheckedTittle, setIsCheckedTittle] = useState(false);
     const [isCheckedDescription, setIsCheckedDescription] = useState(false);
     const [filterStory, setFilterStory] = useState("name");
@@ -35,26 +33,15 @@ export default function MyHistory() {
         }
     });
     
-    function ActionModal() {
-        setShowModal(!showModal);
-    }
     function GetTextInput(event) {
         setTextGet(event.target.value);
     }
-    function OnCheckedUsername() {
-        setIsCheckedUsername(true);
-        setIsCheckedTittle(false);
-        setIsCheckedDescription(false);
-        setFilterStory("name");
-    }
     function OnCheckedTittle() {
-        setIsCheckedUsername(false);
         setIsCheckedTittle(true);
         setIsCheckedDescription(false);
         setFilterStory("title");
     }
     function OnCheckedDescription() {
-        setIsCheckedUsername(false);
         setIsCheckedTittle(false);
         setIsCheckedDescription(true);
         setFilterStory("description");
