@@ -27,7 +27,7 @@ export default function History() {
     });
     useEffect(() => {
         RenderStorys()
-      }, []);
+    }, []);
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -39,7 +39,7 @@ export default function History() {
             toast.onmouseleave = Swal.resumeTimer;
         }
     });
-    
+
     function ActionModal() {
         setShowModal(!showModal);
     }
@@ -95,28 +95,27 @@ export default function History() {
     }
 
     function Liked(idStory) {
-        if (!likeded) {
-            axios.put(`${API_URL}/api/history/disliked?id='${idStory}'`, {
-            headers: {
-                authorization: `Bearer ${TOKEN}`,
-            },
-        })
-            .then(response => {
-                setLikeded(false)
-                alert("descurtido")
-                console.log(likeded)
-            })
-            .catch(error => console.log(error.response));
-        } else {
-            axios.put(`${API_URL}/api/history/like?id='${idStory}'`, {
+        if (likeded) {
+            axios.put(`${API_URL}/api/history/disliked/${idStory}`, {
                 headers: {
                     authorization: `Bearer ${TOKEN}`,
                 },
             })
                 .then(response => {
+                    setLikeded(false)
+                    RenderStorys()
+                })
+                .catch(error => console.log(error.response));
+        } else {
+            axios.put(`${API_URL}/api/history/like/${idStory}`, {
+                headers: {
+                    authorization: `Bearer ${TOKEN}`,
+
+                },
+            })
+                .then(response => {
                     setLikeded(true)
-                    alert("curtido")
-                    console.log("Curtido")
+                    RenderStorys()
                 })
                 .catch(error => console.log(error));
         }
@@ -147,7 +146,7 @@ export default function History() {
                                     </label>
                                 </div>
                             </div>
-                            <input className="input-filter-story" type="text" onChange={GetTextInput}/>
+                            <input className="input-filter-story" type="text" onChange={GetTextInput} />
                         </div>
                         <div className="filter-container-button">
                             <button className="btn-search-story" onClick={FindStory}>
@@ -157,7 +156,7 @@ export default function History() {
                                 <BsFillPlusCircleFill /> Story
                             </button>
                             <button onClick={RenderStorys} className="btn-search-story">
-                            <BsCardList /> All Story
+                                <BsCardList /> All Story
                             </button>
                         </div>
                     </div>
