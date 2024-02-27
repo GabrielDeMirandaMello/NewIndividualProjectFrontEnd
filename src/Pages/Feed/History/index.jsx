@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill } from "react-icons/bs";
+import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
 import axios from "axios";
@@ -11,10 +11,10 @@ import Swal from "sweetalert2";
 export default function History() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
-    const [isCheckedUserName, setIsCheckedUsername] = useState(false);
+    const [isCheckedUserName, setIsCheckedUsername] = useState(true);
     const [isCheckedTittle, setIsCheckedTittle] = useState(false);
     const [isCheckedDescription, setIsCheckedDescription] = useState(false);
-    const [filterStory, setFilterStory] = useState("");
+    const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [likeded, setLikeded] = useState(false)
     const [textGet, setTextGet] = useState("")
@@ -24,6 +24,9 @@ export default function History() {
             navigate('/singin')
         }
     });
+    useEffect(() => {
+        RenderStorys()
+      }, []);
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -62,7 +65,7 @@ export default function History() {
     }
 
     async function FindStory() {
-        await axios.get(`http://localhost:8080/api/history/${filterStory}/${textGet}`, {
+        await axios.get(`http://localhost:8080/api/history/public/${filterStory}/${textGet}`, {
             headers: {
                 authorization: `Bearer ${token}`,
             },
@@ -85,13 +88,7 @@ export default function History() {
             },
         })
             .then(response => {
-                Toast.fire({
-                    icon: "success",
-                    title: "Update Storys !",
-                    timer: 1000
-                });
                 setListOfStory(response.data)
-                console.log(response.data)
             })
             .catch(error => console.log(error.response));
     }
@@ -127,7 +124,7 @@ export default function History() {
 
     return (
         <>
-            <div className="body-home-story">
+            <div className="body-home-story" onLoad={RenderStorys}>
                 <Menu name='history' />
                 <div className="container-feeds">
                     <div className="filter-story">
@@ -159,7 +156,7 @@ export default function History() {
                                 <BsFillPlusCircleFill /> Story
                             </button>
                             <button onClick={RenderStorys} className="btn-search-story">
-                                <BsFillPlusCircleFill /> Update
+                            <BsCardList /> All Story
                             </button>
                         </div>
                     </div>
@@ -182,7 +179,7 @@ export default function History() {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={showModal} />
+            <Modal isOpen={showModal} bearer={token}/>
         </>
     )
 }

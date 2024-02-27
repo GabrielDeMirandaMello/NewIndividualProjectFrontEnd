@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import './modal.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { BsFillXCircleFill } from "react-icons/bs";
 
 export default function Modal(isOpen) {
-    const [tittle, setTittle] = useState();
-    const [description, setDescription] = useState();
-    const navigate = useNavigate();
+    const [titleStory, setTittleStory] = useState();
+    const [descriptionStory, setDescriptionStory] = useState();
+    const [idUser] = useState(sessionStorage.getItem("ID"));
+    const [nameUser] = useState(sessionStorage.getItem("NAME"));
+    const token = sessionStorage.getItem("TOKEN")
     function GetTittle(event) {
-        setTittle(event.target.value);
+        setTittleStory(event.target.value);
     }
     function GetDescription(event) {
-        setDescription(event.target.value);
+        setDescriptionStory(event.target.value);
     }
 
     const Toast = Swal.mixin({
@@ -28,16 +30,40 @@ export default function Modal(isOpen) {
     });
 
     async function SaveStory() {
-        await Toast.fire({
-            icon: "success",
-            title: "Historia Publicada !"
-        });
-        window.location.reload();
+        console.log(token);
+        await axios.post(`http://localhost:8080/api/history/create/${idUser}`, {
+            title: titleStory,
+            description: descriptionStory,
+            comment: "",
+            likeCount: 0,
+            nameUser: nameUser
+        },{
+            headers: {
+                authorization: `Bearer ${token}`,
+            }
+        })
+            .then(async response => {
+                await Toast.fire({
+                    icon: "success",
+                    title: "Story Created !",
+                    timer: 1000
+                });
+                window.location.reload();
+            })
+            .catch(error => console.log(error.response));
     };
+    function Cancel() {
+        window.location.reload();
+    }
+
+
     if (isOpen.isOpen) {
         return (
-            <div className='modal-container-background'>
+            <div id='modal' className='modal-container-background' >
                 <div className='modal-container'>
+                    <div className='cancel-modal'>
+                        <BsFillXCircleFill className='cancel-modal-icon' onClick={Cancel} />
+                    </div>
                     <div className='modal-tittle'>
                         Adicionando sua historia
                     </div>

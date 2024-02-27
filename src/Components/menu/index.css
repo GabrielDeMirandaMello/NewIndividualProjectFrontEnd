@@ -20,6 +20,10 @@
     flex-direction: column;
     height: 40%;
 }
+.container-logof{
+    width: 97%;
+    height: 40px;
+}
 .btn-menu{
     outline: none;
     border-radius: 10px;
