@@ -47,3 +47,39 @@
     box-shadow: 1px 0px 10px;
     width: 40%;
 }
+@media (max-width: 480px) {
+    /* tablet */
+    .buttons-menu{
+        width: 10000px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .details-img{
+        width: 100px;
+        height: auto;
+        cursor: pointer;
+    }
+    .buttons-menu{
+        width: 60%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .details-img{
+        width: 20%;
+        height: auto;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
+    /* tablet */
+    
+}
+@media (max-width: 1024px) {
+    /* laptop */
+    
+}
+@media (max-width: 1200px) {
+    /* telas grandes */
+    
+}
