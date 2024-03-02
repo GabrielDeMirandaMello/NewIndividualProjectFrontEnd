@@ -17,12 +17,12 @@ body::-webkit-scrollbar {
 
 
 .card-home {
-    height: 100vh;
+    height: fit-content;
     width: auto;
 }
 
 .card-home-cards {
-    height: 60vh;
+    height: fit-content;
     width: 90vw;
 }
 
@@ -363,11 +363,11 @@ ul {
     }
 
     .card-home {
-        height: 100vh;
+        height: fit-content;
     }
 
     .card-home-cards {
-        height: 100vh;
+        height: fit-content;
         width: 90vw;
     }
 
@@ -526,11 +526,11 @@ ul {
     }
 
     .card-home {
-        height: 100vh;
+        height: fit-content;
     }
 
     .card-home-cards {
-        height: 100vh;
+        height: fit-content;
         width: 90vw;
     }
 
@@ -690,11 +690,11 @@ ul {
     }
 
     .card-home {
-        height: 100vh;
+        height: fit-content;
     }
 
     .card-home-cards {
-        height: 100vh;
+        height: fit-content;
         width: 90vw;
     }
 
@@ -853,11 +853,11 @@ ul {
     }
 
     .card-home {
-        height: 100vh;
+        height: fit-content;
     }
 
     .card-home-cards {
-        height: 100vh;
+        height: fit-content;
         width: 90vw;
     }
 
