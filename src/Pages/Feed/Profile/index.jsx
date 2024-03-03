@@ -3,7 +3,7 @@ import Menu from "../../../Components/menu";
 import './index.css'
 import { BsPencilFill } from "react-icons/bs";
 import axios from "axios";
-import { TOKEN, USER_ID, USER_NAME, USER_EMAIL, USER_PHONE, USER_REST_MONTH, USER_FAVORITE_COMPANY, API_URL } from "../../../Data/Constants";
+import { TOKEN, USER_ID, USER_NAME, USER_EMAIL, USER_PHONE, USER_REST_MONTH, USER_FAVORITE_COMPANY, API_URL, updateVariables } from "../../../Data/Constants";
 
 export default function Profile() {
     const [disableName, setDisableName] = useState(true);
@@ -71,10 +71,9 @@ export default function Profile() {
             },
         }).then(response => {
             setNameUser(response.data.name);
-            setEmailUser(response.data.email);
-            setPhoneUser(response.data.phone);
             setRestMonthUser(response.data.restMonth);
             setFavoriteCompanyUser(response.data.favoriteCompany);
+            updateVariables();
         })
         .catch(error => console.log(error.response))
     }
