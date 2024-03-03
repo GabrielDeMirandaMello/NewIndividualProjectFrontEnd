@@ -5,7 +5,7 @@ import Navbar from '../../Components/navbar/Navbar';
 import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import { API_URL } from "../../Data/Constants";
+import { API_URL, updateVariables } from "../../Data/Constants";
 
 
 export default function Home() {
@@ -58,19 +58,20 @@ export default function Home() {
                 } catch (error) {
                     console.error('Erro ao decodificar o token:', error);
                 }
-                await axios.get(`${API_URL}/api/users/${sessionStorage.getItem("ID")}`,  {
+                await axios.get(`${API_URL}/api/users/${sessionStorage.getItem("ID")}`, {
                     headers: {
-                      authorization: `Bearer ${token}`,
+                        authorization: `Bearer ${token}`,
                     },
-                  })
-                .then(response => {
-                    sessionStorage.setItem("NAME", response.data.name)
-                    sessionStorage.setItem("EMAIL", response.data.email)
-                    sessionStorage.setItem("PHONE", response.data.phone)
-                    sessionStorage.setItem("REST MONTH", response.data.restMonth)
-                    sessionStorage.setItem("FAVORITE COMPANY", response.data.favoriteCompany)
                 })
-                .catch(error => console.log(error.response));
+                    .then(response => {
+                        sessionStorage.setItem("NAME", response.data.name)
+                        sessionStorage.setItem("EMAIL", response.data.email)
+                        sessionStorage.setItem("PHONE", response.data.phone)
+                        sessionStorage.setItem("REST MONTH", response.data.restMonth)
+                        sessionStorage.setItem("FAVORITE COMPANY", response.data.favoriteCompany)
+                        updateVariables();
+                    })
+                    .catch(error => console.log(error.response));
                 navigate("/history")
             }
         }).catch(error => {
