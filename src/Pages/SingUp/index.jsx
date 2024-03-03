@@ -54,7 +54,7 @@ export default function Home() {
         }
     });
 
-    const regexSenhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12}$/;
+    const regexSenhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\s])[A-Za-z\d@$!%*?&]{12}$/;
 
     function validationData() {
         if (nameUser.length <= 3) {

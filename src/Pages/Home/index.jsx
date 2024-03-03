@@ -25,12 +25,6 @@ function Home() {
         const body = "Mensagem do email";
         window.open(`mailto:${email}?subject=${subject}&body=${body}`);
     }
-
-    function handleWhatsAppClick() {
-        const number = "5511976139421";
-        const message = "Olá, gostaria de saber mais sobre o seu site, podemos conversar ?";
-        window.open(`https://api.whatsapp.com/send?phone=${number}&text=${message}`);
-    }
     function handleGitHubClick() {
         window.open(`https://github.com/GabrielDeMirandaMello`);
     }
@@ -130,17 +124,6 @@ function Home() {
                                             <BsGoogle className='icon-contact' onClick={handleEmailClick} />
                                         </a>
                                         <div class="tooltip">Google</div>
-                                    </li>
-                                    <li class="icon-content">
-                                        <a
-                                            class="link"
-                                            data-social="pinterest"
-                                            aria-label="Pinterest"
-                                            href="https://www.pinterest.com/"
-                                        >
-                                            <BsWhatsapp className='icon-contact' onClick={handleWhatsAppClick} />
-                                        </a>
-                                        <div class="tooltip">WhatsApp</div>
                                     </li>
                                     <li class="icon-content">
                                         <a
