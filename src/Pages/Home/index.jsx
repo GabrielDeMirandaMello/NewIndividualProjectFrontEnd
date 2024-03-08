@@ -1,5 +1,5 @@
 import Navbar from '../../Components/navbar/Navbar';
-import { BsImages, BsFillHandThumbsUpFill, BsFillGeoFill, BsFillRocketTakeoffFill, BsLightbulbFill, BsGem, BsGoogle, BsWhatsapp, BsGithub } from "react-icons/bs";
+import { BsImages, BsFillHandThumbsUpFill, BsFillGeoFill, BsFillRocketTakeoffFill, BsLightbulbFill, BsGem, BsGoogle, BsGithub } from "react-icons/bs";
 import './index.css';
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react"
