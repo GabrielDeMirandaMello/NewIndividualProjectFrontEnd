@@ -7,6 +7,8 @@ import Modal from '../../../Components/Modal/modal';
 import axios from "axios";
 import Swal from "sweetalert2";
 import { TOKEN, API_URL } from "../../../Data/Constants";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 
 
 export default function History() {
@@ -18,7 +20,7 @@ export default function History() {
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [likeded, setLikeded] = useState(false)
-    const [textGet, setTextGet] = useState("")
+    const [textGet, setTextGet] = useState("");
     const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
         if (token === null) {
@@ -66,59 +68,56 @@ export default function History() {
     }
 
     async function FindStory() {
-        await axios.get(`${API_URL}/api/history/public/${filterStory}/${textGet}`, {
+        await axios.get(`${API_URL}/api/story/public/${filterStory}/${textGet}`, {
             headers: {
                 authorization: `Bearer ${TOKEN}`,
             },
         })
-            .then(response => {
-                Toast.fire({
-                    icon: "success",
-                    title: "Filter applied !",
-                });
-                setListOfStory(response.data)
+            .then(async response => {
+                const storiesWithImages = await Promise.all(response.data.map(async story => {
+                    try {
+                        // Obter URL da imagem do Firebase usando o ID da história
+                        const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
+                        const url = await getDownloadURL(storageRef);
+                        
+                        // Retorna a história com a URL da imagem
+                        return { ...story, imagem: url };
+                    } catch (error) {
+                        console.error('Erro ao obter URL da imagem:', error);
+                        // Em caso de erro, retorna a história sem a URL da imagem
+                        return story;
+                    }
+                }));
+                setListOfStory(storiesWithImages)
             })
             .catch(error => console.log(error.response));
     }
 
     async function RenderStorys() {
 
-        await axios.get(`${API_URL}/api/history/all`, {
+        await axios.get(`${API_URL}/api/story/all`, {
             headers: {
                 authorization: `Bearer ${token}`,
             },
         })
-            .then(response => {
-                setListOfStory(response.data)
+            .then(async response => {
+                const storiesWithImages = await Promise.all(response.data.map(async story => {
+                    try {
+                        // Obter URL da imagem do Firebase usando o ID da história
+                        const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
+                        const url = await getDownloadURL(storageRef);
+                        console.log(url)
+                        // Retorna a história com a URL da imagem
+                        return { ...story, imagem: url };
+                    } catch (error) {
+                        console.error('Erro ao obter URL da imagem:', error);
+                        // Em caso de erro, retorna a história sem a URL da imagem
+                        return story;
+                    }
+                }));
+                setListOfStory(storiesWithImages)
             })
             .catch(error => console.log(error.response));
-    }
-
-    function Liked(idStory) {
-        if (likeded) {
-            axios.put(`${API_URL}/api/history/disliked/${idStory}`, {
-                headers: {
-                    authorization: `Bearer ${TOKEN}`,
-                },
-            })
-                .then(response => {
-                    setLikeded(false)
-                    RenderStorys()
-                })
-                .catch(error => console.log(error.response));
-        } else {
-            axios.put(`${API_URL}/api/history/like/${idStory}`, {
-                headers: {
-                    authorization: `Bearer ${TOKEN}`,
-
-                },
-            })
-                .then(response => {
-                    setLikeded(true)
-                    RenderStorys()
-                })
-                .catch(error => console.log(error));
-        }
     }
 
 
@@ -165,13 +164,14 @@ export default function History() {
                             listOfStory.map((story) => (
                                 <div className="card-story" key={story.id}>
                                     <div className="user-story">{story.nameUser}</div>
+                                    <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
                                     <div className="tittle-story">{story.title}</div>
                                     <div className="description-story">
                                         {story.description}
                                     </div>
                                     <div className="like-story">
                                         <span className="quantity-like">{story.likeCount}</span>
-                                        <BsFillChatHeartFill className="like" onClick={() => Liked(story.id)} />
+                                        <BsFillChatHeartFill className="like" />
                                     </div>
                                 </div>
                             ))
