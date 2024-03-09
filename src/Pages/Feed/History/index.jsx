@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
 import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
+import { BiCameraOff } from "react-icons/bi";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
 import axios from "axios";
@@ -106,18 +107,16 @@ export default function History() {
                         // Obter URL da imagem do Firebase usando o ID da história
                         const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
                         const url = await getDownloadURL(storageRef);
-                        console.log(url)
                         // Retorna a história com a URL da imagem
                         return { ...story, imagem: url };
                     } catch (error) {
-                        console.error('Erro ao obter URL da imagem:', error);
                         // Em caso de erro, retorna a história sem a URL da imagem
                         return story;
                     }
                 }));
                 setListOfStory(storiesWithImages)
             })
-            .catch(error => console.log(error.response));
+            .catch(error => console.log('nenhuma imagem encontrada para o post !'));
     }
 
 
@@ -164,7 +163,10 @@ export default function History() {
                             listOfStory.map((story) => (
                                 <div className="card-story" key={story.id}>
                                     <div className="user-story">{story.nameUser}</div>
-                                    <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
+                                    {
+                                       story.imagem === undefined ? <BiCameraOff className="icon-not-img" /> : <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
+                                    }
+                                    
                                     <div className="tittle-story">{story.title}</div>
                                     <div className="description-story">
                                         {story.description}

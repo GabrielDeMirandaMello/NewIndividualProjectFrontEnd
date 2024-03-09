@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react"
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
 import { BsFillSearchHeartFill, BsFillChatHeartFill, BsCardList } from "react-icons/bs";
+import { BiCameraOff } from "react-icons/bi";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { TOKEN, USER_NAME, API_URL } from "../../../Data/Constants";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 
 export default function MyHistory() {
     const navigate = useNavigate();
@@ -48,7 +51,7 @@ export default function MyHistory() {
     }
 
     async function FindStory() {
-        await axios.get(`${API_URL}/api/history/${USER_NAME}/${filterStory}/${textGet}`, {
+        await axios.get(`${API_URL}/api/story/${USER_NAME}/${filterStory}/${textGet}`, {
             headers: {
                 authorization: `Bearer ${TOKEN}`,
             },
@@ -66,13 +69,25 @@ export default function MyHistory() {
 
     async function RenderStorys() {
 
-        await axios.get(`${API_URL}/api/history/public/name/${USER_NAME}`, {
+        await axios.get(`${API_URL}/api/story/public/name/${USER_NAME}`, {
             headers: {
                 authorization: `Bearer ${TOKEN}`,
             },
         })
-            .then(response => {
-                setListOfStory(response.data)
+            .then(async response => {
+                const storiesWithImages = await Promise.all(response.data.map(async story => {
+                    try {
+                        // Obter URL da imagem do Firebase usando o ID da história
+                        const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
+                        const url = await getDownloadURL(storageRef);
+                        // Retorna a história com a URL da imagem
+                        return { ...story, imagem: url };
+                    } catch (error) {
+                        // Em caso de erro, retorna a história sem a URL da imagem
+                        return story;
+                    }
+                }));
+                setListOfStory(storiesWithImages)
             })
             .catch(error => console.log(error.response));
     }
@@ -113,6 +128,10 @@ export default function MyHistory() {
                             listOfStory.map((story) => (
                                 <div className="card-story" key={story.id}>
                                     <div className="user-story">{story.nameUser}</div>
+                                    {
+                                       story.imagem === undefined ? <BiCameraOff className="icon-not-img" /> : <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
+                                    }
+                                    
                                     <div className="tittle-story">{story.title}</div>
                                     <div className="description-story">
                                         {story.description}
