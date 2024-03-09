@@ -46,11 +46,6 @@ export default function Modal(isOpen) {
             }
         })
             .then(async response => {
-                await Toast.fire({
-                    icon: "success",
-                    title: "Story Created !",
-                    timer: 1000
-                });
                 handleUpload(response.data.id)
             })
             .catch(error => console.log(error.response));
@@ -73,58 +68,64 @@ export default function Modal(isOpen) {
     };
 
     function handleUpload(id) {
-        
+
         const storageRef = ref(storage, `Posts/${id}-imagem-post`);
         console.log(id);
         const uploadTask = uploadBytesResumable(storageRef, urlImgStorage);
 
         uploadTask.on("state_changed",
-        (snapshot) => {
+            (snapshot) => {
 
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            
-        },
-        (error) => {
-            console.log(error.response)
-        },
-        ()=> {
-            window.location.reload();
-        }
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                if (progress > 0) {
+                    setCarregandoImg(true)
+                }
+            },
+            (error) => {
+                console.log(error.response)
+            },
+            () => {
+                window.location.reload();
+            }
         )
     };
 
     if (isOpen.isOpen) {
         return (
             <>
-            {carregandoImg && <span>Creating Story...</span>}
-            {!carregandoImg && <div id='modal' className='modal-container-background' >
-                <div className='modal-container'>
-                    <div className='cancel-modal'>
-                        <BsFillXCircleFill className='cancel-modal-icon' onClick={Cancel} />
-                    </div>
-                    <div className='modal-tittle'>
-                        Adicionando sua historia
-                    </div>
+                <div id='modal' className='modal-container-background' >
+                    <div className='modal-container'>
+                        {carregandoImg && <div class="loader">Creating...<span></span> </div>}
+                        {!carregandoImg &&
+                            <>
+                                <div className='cancel-modal'>
+                                    <BsFillXCircleFill className='cancel-modal-icon' onClick={Cancel} />
+                                </div>
+                                <div className='modal-tittle'>
+                                    Adicionando sua historia
+                                </div>
 
-                    {(imgUrl && <img src={imgUrl} alt="imagen post" width={"200"} />) ||
-                        <div className="input-div-img">
-                            <input className="input-img" name="file" type="file" onChange={handleUpdateFile} />
-                            <BsCameraFill className='icon-modal' />
-                        </div>
-                    }
-                    <div className='modal-tittle-story'>
-                        Titulo
-                        <textarea onChange={GetTittle} className='text-tittle' name="text-description" id="" cols="2" rows="1"></textarea>
-                    </div>
-                    <div className='modal-description-story'>
-                        Descrição
-                        <textarea onChange={GetDescription} className='text' name="text-description" id="" cols="10" rows="1"></textarea>
-                    </div>
-                    <div className='modal-button-story'>
-                        <button className='btn-story' type='submit' onClick={SaveStory}>Criar</button>
+                                {(imgUrl && <img src={imgUrl} alt="imagen post" height={"150"} />) ||
+                                    <div className="input-div-img">
+                                        <input className="input-img" name="file" type="file" onChange={handleUpdateFile} />
+                                        <BsCameraFill className='icon-modal' />
+                                    </div>
+                                }
+                                <div className='modal-tittle-story'>
+                                    Titulo
+                                    <textarea onChange={GetTittle} className='text-tittle' name="text-description" id="" cols="2" rows="1"></textarea>
+                                </div>
+                                <div className='modal-description-story'>
+                                    Descrição
+                                    <textarea onChange={GetDescription} className='text' name="text-description" id="" cols="10" rows="1"></textarea>
+                                </div>
+                                <div className='modal-button-story'>
+                                    <button className='btn-story' type='submit' onClick={SaveStory}>Criar</button>
+                                </div>
+                            </>
+                        }
                     </div>
                 </div>
-            </div>}
             </>
         )
     }
