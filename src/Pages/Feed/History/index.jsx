@@ -22,7 +22,6 @@ export default function History() {
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [selectedStory, setSelectedStory] = useState(null);
-    const [likededs, setLikededs] = useState(0)
     const [textGet, setTextGet] = useState("");
     const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
@@ -32,7 +31,7 @@ export default function History() {
     });
     useEffect(() => {
         RenderStorys()
-    }, [likededs]);
+    }, []);
 
     function ActionModal() {
         setShowModalCreateStory(!showModalCreateStory);
