@@ -6,7 +6,6 @@ import { BiCameraOff } from "react-icons/bi";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
 import axios from "axios";
-import Swal from "sweetalert2";
 import { TOKEN, API_URL } from "../../../Data/Constants";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../firebase";
@@ -31,17 +30,6 @@ export default function History() {
     useEffect(() => {
         RenderStorys()
     }, []);
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
 
     function ActionModal() {
         setShowModal(!showModal);

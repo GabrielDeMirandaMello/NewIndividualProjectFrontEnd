@@ -131,7 +131,8 @@ export default function Modal(isOpen) {
                                 {(imgUrl && <img src={imgUrl} alt="imagen post" height={"150"} />) ||
                                     <div className="input-div-img">
                                         <input className="input-img" name="file" type="file" onChange={handleUpdateFile} />
-                                        <BsCameraFill className='icon-modal' />
+                                        {/* <BsCameraFill className='icon-modal' /> */}
+                                        <span>Carregue sua Foto</span>
                                     </div>
                                 }
                                 <div className='modal-tittle-story'>
