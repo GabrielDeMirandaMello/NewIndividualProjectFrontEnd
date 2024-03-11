@@ -79,48 +79,82 @@
 }
 .card-story{
     width: 80%;
+    height: fit-content;
     padding: 10px 30px;
     border-radius: 10px;
     border: 1px solid #000000;
     z-index: 0;
     margin-bottom: 20px;
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .user-story{
     margin-top: -24px;
-    width: fit-content;
+    width: 50%;
     z-index: 1;
+    
     font-weight: 600;
     background-color: #000;
     border-radius: 10px;
     padding: 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #FFFFFF;
+}
+.img-all-post{
+    border-radius: 20px;
+    box-shadow: 0 0 10px #000;
+    margin-top: 10px;
+    height: 80%;
+    width: 30%;
+}
+.icon-not-img{
+    height: 80%;
+    width: 30%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #000;
+    margin-top: 10px;
 }
 .tittle-story{
     width: fit-content;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 900;
+    font-size: 26px;
 }
 .description-story{
     height: fit-content;
     border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
     padding: 5px 2px 5px 2px;
 }
-.like-story{
+.like-comment-story{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    width: 50%;
     padding: 10px;
 }
-.like{
+.comment-like{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    width: fit-content;
     cursor: pointer;
-    color: #00c500;
-    width: 25px;
-    height: auto;
-    cursor: pointer;
+    border: 2px solid black;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
 }
+.comment-like:hover{
+    border: 0.1px solid black;
+    color: #000;
+    transition: all 300ms ease-in-out;
+}
+
 .quantity-like{
     margin-right: 10px;
 }
@@ -167,8 +201,3 @@
     color: #FFFFFF;
   }
 /* FIM RADIO BUTTONS*/
-.img-all-post{
-    border-radius: 20px;
-    box-shadow: 0 0 10px #000;
-    margin-top: 10px;
-}

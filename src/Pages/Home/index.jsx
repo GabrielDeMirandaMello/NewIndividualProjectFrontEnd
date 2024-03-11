@@ -9,15 +9,6 @@ import React from 'react';
 
 function Home() {
     const navigate = useNavigate();
-    window.onload = function () {
-        (function (d, script) {
-            script = d.createElement('script');
-            script.type = 'text/javascript';
-            script.async = true;
-            script.src = 'https://w.app/widget-v1/Ih74Ar.js';
-            d.getElementsByTagName('head')[0].appendChild(script);
-        }(document));
-    };
 
     function handleEmailClick() {
         const email = "Gabrielmirandamello9@gmail.com";
@@ -119,7 +110,6 @@ function Home() {
                                             class="link"
                                             data-social="google"
                                             aria-label="Google"
-                                            href="https://www.spotify.com/"
                                         >
                                             <BsGoogle className='icon-contact' onClick={handleEmailClick} />
                                         </a>
@@ -130,7 +120,6 @@ function Home() {
                                             class="link"
                                             data-social="dribbble"
                                             aria-label="Dribbble"
-                                            href="https://dribbble.com/"
                                         >
                                             <BsGithub className='icon-contact' onClick={handleGitHubClick} />
                                         </a>

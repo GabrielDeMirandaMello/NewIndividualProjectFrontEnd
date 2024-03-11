@@ -1,0 +1,93 @@
+.modal-comments-container-background{
+    position: fixed;
+    width: 35%;
+    height: 40%;
+    left: 30%;
+    top: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'poppins';
+    border-radius: 20px;
+    background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
+    box-shadow: 0 0 20px;
+}
+.modal-comments-container-background::-webkit-scrollbar{
+    display: none;
+}
+.modal-comments-container{
+    width: 100%;
+    height: 50%;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.modal-comments-cards{
+    height: 100%;
+    width: 80%;
+    padding: 50px;
+}
+.card-comment{
+    width: 100%;
+    height: fit-content;
+    margin: 20px 0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background-color: #FFF;
+}
+
+.input-add-comment{
+    outline: none;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    margin: 0 20px 1px 0;
+    width: 65%;
+
+}
+.btn-add-comment{
+    width: 30%;
+    outline: none;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: #009501;
+    color: #FFF;
+}
+.btn-add-comment:active{
+    width: 30%;
+    outline: none;
+    padding: 5px;
+    border-radius: 10px;
+    border: 0.5px solid #000;
+    background-color: #009501;
+    color: #FFF;
+}
+.card-name-comment{
+    font-weight: 900;
+}
+.card-description-comment{
+    font-size: 1rem;
+}
+.container-comments{
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px;
+    padding: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    overflow: scroll;
+}
+.container-comments::-webkit-scrollbar{
+    display: none;
+}
+.span-comment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+}
