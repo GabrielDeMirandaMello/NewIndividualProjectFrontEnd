@@ -40,6 +40,7 @@ export default function Modal(isOpen) {
             })
             .then(response => {
                 setListOfStory([...listOfStory, response.data]);
+                setDescriptionStory("")
             })
             .catch(error => console.log(error.response));
     };
@@ -54,7 +55,7 @@ export default function Modal(isOpen) {
                 <div id='modal' className='modal-comments-container-background' >
                     <div className='modal-comments-cards' >
                         <div>
-                            <input className='input-add-comment' onChange={GetDescription} type="text" placeholder='Escreva seu comentário' />
+                            <input className='input-add-comment' value={descriptionStory} onChange={GetDescription} type="text" placeholder='Escreva seu comentário' />
                             <button className='btn-add-comment' onClick={CreateComment}>Comentar</button>
                         </div>
                         <div className='container-comments'>
