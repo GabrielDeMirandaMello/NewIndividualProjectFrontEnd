@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import { BsFillSearchHeartFill, BsFillChatHeartFill, BsCardList } from "react-icons/bs";
+import { BsFillSearchHeartFill, BsFillHeartFill, BsCardList, BsChatDotsFill } from "react-icons/bs";
+import CommentsModal from '../../../Components/Modal/Commets/comments.modal';
 import { BiCameraOff } from "react-icons/bi";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -13,9 +14,11 @@ export default function MyHistory() {
     const navigate = useNavigate();
     const [isCheckedTittle, setIsCheckedTittle] = useState(false);
     const [isCheckedDescription, setIsCheckedDescription] = useState(false);
+    const [showModalComments, setShowModalComments] = useState(false);
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [textGet, setTextGet] = useState("")
+    const [selectedStory, setSelectedStory] = useState(null);
     useEffect(() => {
         if (TOKEN === null) {
             navigate('/singin')
@@ -91,7 +94,14 @@ export default function MyHistory() {
             })
             .catch(error => console.log(error.response));
     }
-
+    function ActionModalComments(story) {
+        setSelectedStory(story)
+        ModalComments()
+    }
+    function ModalComments() {
+        setShowModalComments(!showModalComments)
+        console.log(selectedStory)
+    }
     return (
         <>
             <div className="body-home-story">
@@ -123,22 +133,29 @@ export default function MyHistory() {
                             </button>
                         </div>
                     </div>
-                    <div className="feed-story">
+                    <div className="feed-story" onScroll={() => setShowModalComments(false)}>
                     {listOfStory.length >= 0 &&
-                            listOfStory.map((story) => (
-                                <div className="card-story" key={story.id}>
+                            listOfStory.map((story, key) => (
+                                <div className="card-story" key={key}>
                                     <div className="user-story">{story.nameUser}</div>
                                     {
-                                       story.imagem === undefined ? <BiCameraOff className="icon-not-img" /> : <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
+                                        story.imagem === undefined ? <BiCameraOff className="icon-not-img" /> : <img className="img-all-post" src={story.imagem} alt="" />
                                     }
-                                    
+
                                     <div className="tittle-story">{story.title}</div>
                                     <div className="description-story">
                                         {story.description}
                                     </div>
-                                    <div className="like-story">
-                                        <span className="quantity-like">{story.likeCount}</span>
-                                        <BsFillChatHeartFill className="like" />
+                                    <div className="like-comment-story">
+                                        <div className="comment-like" onClick={() => ActionModalComments(story)} >
+                                            <span className="quantity-like">Comentarios</span>
+                                            <BsChatDotsFill />
+                                        </div>
+                                        <div className="comment-like">
+                                            <span>{story.likeCount}</span>
+                                            <span className="quantity-like">Cutidas</span>
+                                            <BsFillHeartFill />
+                                        </div>
                                     </div>
                                 </div>
                             ))
@@ -146,6 +163,7 @@ export default function MyHistory() {
                     </div>
                 </div>
             </div>
+            {selectedStory && <CommentsModal isOpen={showModalComments} story={selectedStory} />}
         </>
     )
 }
