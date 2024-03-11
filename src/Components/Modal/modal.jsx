@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './modal.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { BsFillXCircleFill, BsCameraFill } from "react-icons/bs";
+import { BsFillXCircleFill } from "react-icons/bs";
 import { TOKEN, API_URL } from "../../Data/Constants";
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../Pages/firebase';
 
 export default function Modal(isOpen) {
@@ -131,7 +131,6 @@ export default function Modal(isOpen) {
                                 {(imgUrl && <img src={imgUrl} alt="imagen post" height={"150"} />) ||
                                     <div className="input-div-img">
                                         <input className="input-img" name="file" type="file" onChange={handleUpdateFile} />
-                                        {/* <BsCameraFill className='icon-modal' /> */}
                                         <span>Carregue sua Foto</span>
                                     </div>
                                 }
