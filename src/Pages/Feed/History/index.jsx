@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import { BsFillSearchHeartFill, BsFillChatHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
+import { BsFillSearchHeartFill, BsChatDotsFill, BsFillHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
+import { BiCameraOff } from "react-icons/bi";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
+import CommentsModal from '../../../Components/Modal/Commets/comments.modal';
 import axios from "axios";
-import Swal from "sweetalert2";
-import { TOKEN, API_URL } from "../../../Data/Constants";
+import { TOKEN, API_URL, USER_NAME } from "../../../Data/Constants";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../firebase";
 
 
 export default function History() {
     const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
+    const [showModalCreateStory, setShowModalCreateStory] = useState(false);
+    const [showModalComments, setShowModalComments] = useState(false);
     const [isCheckedUserName, setIsCheckedUsername] = useState(true);
     const [isCheckedTittle, setIsCheckedTittle] = useState(false);
     const [isCheckedDescription, setIsCheckedDescription] = useState(false);
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
-    const [likeded, setLikeded] = useState(false)
+    const [selectedStory, setSelectedStory] = useState(null);
+    const [likededs, setLikededs] = useState(0)
     const [textGet, setTextGet] = useState("");
     const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
@@ -29,21 +32,10 @@ export default function History() {
     });
     useEffect(() => {
         RenderStorys()
-    }, []);
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
+    }, [likededs]);
 
     function ActionModal() {
-        setShowModal(!showModal);
+        setShowModalCreateStory(!showModalCreateStory);
     }
     function GetTextInput(event) {
         setTextGet(event.target.value);
@@ -79,7 +71,7 @@ export default function History() {
                         // Obter URL da imagem do Firebase usando o ID da história
                         const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
                         const url = await getDownloadURL(storageRef);
-                        
+
                         // Retorna a história com a URL da imagem
                         return { ...story, imagem: url };
                     } catch (error) {
@@ -103,19 +95,43 @@ export default function History() {
             .then(async response => {
                 const storiesWithImages = await Promise.all(response.data.map(async story => {
                     try {
-                        // Obter URL da imagem do Firebase usando o ID da história
                         const storageRef = ref(storage, `Posts/${story.id}-imagem-post`);
                         const url = await getDownloadURL(storageRef);
-                        console.log(url)
-                        // Retorna a história com a URL da imagem
-                        return { ...story, imagem: url };
+                        
+                            return { ...story, imagem: url};
                     } catch (error) {
-                        console.error('Erro ao obter URL da imagem:', error);
-                        // Em caso de erro, retorna a história sem a URL da imagem
                         return story;
                     }
                 }));
                 setListOfStory(storiesWithImages)
+            })
+            .catch(error => console.log('nenhuma imagem encontrada para o post !'));
+    }
+    function ActionModalComments(story) {
+        setSelectedStory(story)
+        ModalComments()
+    }
+    function ModalComments() {
+        setShowModalComments(!showModalComments)
+        console.log(selectedStory)
+    }
+
+    function ActionLikededStory(story) {
+        CreateLikeded(story);
+    }
+
+    async function CreateLikeded(story) {
+        await axios.post(`${API_URL}/api/likeded`, {
+            name: USER_NAME,
+            idStory: story.id
+        }, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        })
+            .then(async response => {
+                console.log(response.status)
+                RenderStorys()
             })
             .catch(error => console.log(error.response));
     }
@@ -159,19 +175,29 @@ export default function History() {
                             </button>
                         </div>
                     </div>
-                    <div className="feed-story">
-                        {listOfStory.length >= 0 &&
-                            listOfStory.map((story) => (
-                                <div className="card-story" key={story.id}>
+                    <div className="feed-story" onScroll={() => setShowModalComments(false)}>
+                        {listOfStory && listOfStory.length > 0 &&
+                            listOfStory.map((story, key) => (
+                                <div className="card-story" key={key}>
                                     <div className="user-story">{story.nameUser}</div>
-                                    <img className="img-all-post" src={story.imagem} alt="" width={300} height={300} />
+                                    {
+                                        story.imagem === undefined ? <BiCameraOff className="icon-not-img" /> : <img className="img-all-post" src={story.imagem} alt="" />
+                                    }
+
                                     <div className="tittle-story">{story.title}</div>
                                     <div className="description-story">
                                         {story.description}
                                     </div>
-                                    <div className="like-story">
-                                        <span className="quantity-like">{story.likeCount}</span>
-                                        <BsFillChatHeartFill className="like" />
+                                    <div className="like-comment-story">
+                                        <div className="comment-like" onClick={() => ActionModalComments(story)} >
+                                            <span className="quantity-like">Comentarios</span>
+                                            <BsChatDotsFill />
+                                        </div>
+                                        <div className="comment-like" onClick={() => ActionLikededStory(story)}>
+                                            <span>{story.likeCount}</span>
+                                            <span className="quantity-like">Cutidas</span>
+                                            <BsFillHeartFill />
+                                        </div>
                                     </div>
                                 </div>
                             ))
@@ -179,7 +205,8 @@ export default function History() {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={showModal} />
+            <Modal isOpen={showModalCreateStory} />
+            {selectedStory && <CommentsModal isOpen={showModalComments} story={selectedStory} />}
         </>
     )
 }

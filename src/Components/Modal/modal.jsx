@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './modal.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { BsFillXCircleFill, BsCameraFill } from "react-icons/bs";
+import { BsFillXCircleFill } from "react-icons/bs";
 import { TOKEN, API_URL } from "../../Data/Constants";
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../Pages/firebase';
 
 export default function Modal(isOpen) {
-    const [titleStory, setTittleStory] = useState();
-    const [descriptionStory, setDescriptionStory] = useState();
+    const [titleStory, setTittleStory] = useState("");
+    const [descriptionStory, setDescriptionStory] = useState("");
     const [imgUrl, setImgUrl] = useState("");
     const [urlImgStorage, setUrlImageStorage] = useState("");
     const [carregandoImg, setCarregandoImg] = useState(false);
@@ -33,22 +33,45 @@ export default function Modal(isOpen) {
         }
     });
 
-    async function SaveStory() {
-        await axios.post(`${API_URL}/api/story/create/${sessionStorage.getItem("ID")}`, {
-            title: titleStory,
-            description: descriptionStory,
-            comment: "",
-            likeCount: 0,
-            nameUser: sessionStorage.getItem("NAME")
-        }, {
-            headers: {
-                authorization: `Bearer ${TOKEN}`,
+    function validationData(){
+        if(titleStory.length >= 3){
+            if(descriptionStory.length >= 3){
+                return true
+            } else {
+                return false
             }
-        })
-            .then(async response => {
-                handleUpload(response.data.id)
+        } else {
+            return false;
+        }
+    }
+
+    async function SaveStory() {
+        if(validationData()){
+            await axios.post(`${API_URL}/api/story/create/${sessionStorage.getItem("ID")}`, {
+                title: titleStory,
+                description: descriptionStory,
+                comment: "",
+                likeCount: 0,
+                nameUser: sessionStorage.getItem("NAME")
+            }, {
+                headers: {
+                    authorization: `Bearer ${TOKEN}`,
+                }
             })
-            .catch(error => console.log(error.response));
+                .then(async response => {
+                    if(!urlImgStorage === ""){
+                        handleUpload(response.data.id)
+                    }
+                    setCarregandoImg(true)
+                    window.location.reload();
+                })
+                .catch(error => console.log(error.response));
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Preencha os campos com no minimo 3 caracteres !"
+            });
+        }
     };
     function Cancel() {
         window.location.reload();
@@ -108,7 +131,7 @@ export default function Modal(isOpen) {
                                 {(imgUrl && <img src={imgUrl} alt="imagen post" height={"150"} />) ||
                                     <div className="input-div-img">
                                         <input className="input-img" name="file" type="file" onChange={handleUpdateFile} />
-                                        <BsCameraFill className='icon-modal' />
+                                        <span>Carregue sua Foto</span>
                                     </div>
                                 }
                                 <div className='modal-tittle-story'>
