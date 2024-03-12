@@ -6,6 +6,7 @@ import { BiCameraOff } from "react-icons/bi";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
 import CommentsModal from '../../../Components/Modal/Commets/comments.modal';
+import ButtonLikeded from '../../../Components/Modal/Likeded/Button.Likeded'
 import axios from "axios";
 import { TOKEN, API_URL, USER_NAME } from "../../../Data/Constants";
 import { getDownloadURL, ref } from "firebase/storage";
@@ -22,6 +23,7 @@ export default function History() {
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [selectedStory, setSelectedStory] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(null);
     const [textGet, setTextGet] = useState("");
     const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
@@ -115,8 +117,8 @@ export default function History() {
         console.log(selectedStory)
     }
 
-    function ActionLikededStory(story) {
-        CreateLikeded(story);
+    async function ActionLikededStory(story, index) {
+        await CreateLikeded(story);
     }
 
     async function CreateLikeded(story) {
@@ -192,11 +194,7 @@ export default function History() {
                                             <span className="quantity-like">Comentarios</span>
                                             <BsChatDotsFill />
                                         </div>
-                                        <div className="comment-like" onClick={() => ActionLikededStory(story)}>
-                                            <span>{story.likeCount}</span>
-                                            <span className="quantity-like">Cutidas</span>
-                                            <BsFillHeartFill />
-                                        </div>
+                                        <ButtonLikeded ActionLikeded={() => ActionLikededStory(story, key)} storyCount={story.likeCount}/>
                                     </div>
                                 </div>
                             ))
