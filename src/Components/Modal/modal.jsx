@@ -59,11 +59,10 @@ export default function Modal(isOpen) {
                 }
             })
                 .then(async response => {
-                    if(!urlImgStorage === ""){
+                    if(urlImgStorage !== ""){
                         handleUpload(response.data.id)
                     }
                     setCarregandoImg(true)
-                    window.location.reload();
                 })
                 .catch(error => console.log(error.response));
         } else {
@@ -74,7 +73,7 @@ export default function Modal(isOpen) {
         }
     };
     function Cancel() {
-        window.location.reload();
+        isOpen.onClose();
     }
 
 
@@ -90,7 +89,7 @@ export default function Modal(isOpen) {
         }
     };
 
-    function handleUpload(id) {
+    async function handleUpload(id) {
 
         const storageRef = ref(storage, `Posts/${id}-imagem-post`);
         console.log(id);
@@ -103,6 +102,7 @@ export default function Modal(isOpen) {
                 if (progress > 0) {
                     setCarregandoImg(true)
                 }
+                console.log(progress)
             },
             (error) => {
                 console.log(error.response)

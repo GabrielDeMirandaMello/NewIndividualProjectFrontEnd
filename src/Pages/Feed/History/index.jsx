@@ -204,8 +204,8 @@ export default function History() {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={showModalCreateStory} />
-            {selectedStory && <CommentsModal isOpen={showModalComments} story={selectedStory} />}
+            <Modal isOpen={showModalCreateStory} onClose={() => setShowModalCreateStory(false)} />
+            {selectedStory && <CommentsModal isOpen={showModalComments} onClose={() => setShowModalComments(false)} story={selectedStory} />}
         </>
     )
 }

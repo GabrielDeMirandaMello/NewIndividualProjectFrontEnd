@@ -163,7 +163,7 @@ export default function MyHistory() {
                     </div>
                 </div>
             </div>
-            {selectedStory && <CommentsModal isOpen={showModalComments} story={selectedStory} />}
+            {selectedStory && <CommentsModal isOpen={showModalComments} onClose={() => setShowModalComments(false)} story={selectedStory} />}
         </>
     )
 }
