@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
-
+import { BsFillXCircleFill } from "react-icons/bs";
 import { TOKEN, API_URL } from "../../../Data/Constants";
 import axios from 'axios';
 
@@ -17,13 +17,12 @@ export default function Modal(isOpen) {
             .then(async response => {
                 setListOfStory(response.data)
             })
-            .catch(error => 
-                {
-                    if(error.response.status === 404){
-                        setListOfStory([])
-                    }
+            .catch(error => {
+                if (error.response.status === 404) {
+                    setListOfStory([])
                 }
-                );
+            }
+            );
     };
 
     async function CreateComment() {
@@ -48,12 +47,17 @@ export default function Modal(isOpen) {
     function GetDescription(event) {
         setDescriptionStory(event.target.value);
     }
-
+    function Cancel() {
+        isOpen.onClose();
+    }
     if (isOpen.isOpen) {
         return (
             <>
                 <div id='modal' className='modal-comments-container-background' >
                     <div className='modal-comments-cards' >
+                        <div className='cancel-modal-comments'>
+                            <BsFillXCircleFill className='cancel-modal-icon' onClick={Cancel} />
+                        </div>
                         <div>
                             <input className='input-add-comment' value={descriptionStory} onChange={GetDescription} type="text" placeholder='Escreva seu comentário' />
                             <button className='btn-add-comment' onClick={CreateComment}>Comentar</button>
