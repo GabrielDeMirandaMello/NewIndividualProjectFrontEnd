@@ -6,6 +6,8 @@ import { BsEnvelopeAtFill, BsFillUnlockFill } from "react-icons/bs";
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { API_URL, updateVariables } from "../../Data/Constants";
+import { getDownloadURL, ref } from 'firebase/storage';
+import { storage } from '../firebase';
 
 
 export default function Home() {
@@ -63,12 +65,15 @@ export default function Home() {
                         authorization: `Bearer ${token}`,
                     },
                 })
-                    .then(response => {
+                    .then(async response => {
                         sessionStorage.setItem("NAME", response.data.name)
                         sessionStorage.setItem("EMAIL", response.data.email)
                         sessionStorage.setItem("PHONE", response.data.phone)
                         sessionStorage.setItem("REST MONTH", response.data.restMonth)
                         sessionStorage.setItem("FAVORITE COMPANY", response.data.favoriteCompany)
+                        const storageRef = ref(storage, `Users/${sessionStorage.getItem("ID")}-imagem-perfil`);
+                        const url = await getDownloadURL(storageRef);
+                        sessionStorage.setItem("UI", url)
                         updateVariables();
                     })
                     .catch(error => console.log(error.response));
