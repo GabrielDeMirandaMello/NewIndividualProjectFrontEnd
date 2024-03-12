@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Menu from "../../../Components/menu";
 import { useNavigate } from "react-router-dom";
-import { BsFillSearchHeartFill, BsChatDotsFill, BsFillHeartFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
+import { BsFillSearchHeartFill, BsChatDotsFill, BsFillPlusCircleFill, BsCardList } from "react-icons/bs";
 import { BiCameraOff } from "react-icons/bi";
 import './index.css'
 import Modal from '../../../Components/Modal/modal';
@@ -23,7 +23,6 @@ export default function History() {
     const [filterStory, setFilterStory] = useState("name");
     const [listOfStory, setListOfStory] = useState([]);
     const [selectedStory, setSelectedStory] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(null);
     const [textGet, setTextGet] = useState("");
     const token = sessionStorage.getItem("TOKEN")
     useEffect(() => {
