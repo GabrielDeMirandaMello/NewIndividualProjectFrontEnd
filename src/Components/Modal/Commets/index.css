@@ -2,7 +2,7 @@
     position: fixed;
     width: 35%;
     height: 40%;
-    left: 30%;
+    left: 38%;
     top: 30%;
     display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@
     font-family: 'poppins';
     border-radius: 20px;
     background: linear-gradient(180deg, #19A6A5, #A8FE75) no-repeat;
-    box-shadow: 0 0 20px;
+    box-shadow: 0 0 2px 1000px rgba(0, 0, 0, 0.53);
 }
 .modal-comments-container-background::-webkit-scrollbar{
     display: none;
@@ -90,4 +90,8 @@
     justify-content: center;
     align-items: center;
     margin-top: 20%;
+}
+.cancel-modal-comments{
+    margin: -30px 0 30px 515px;
+    padding-top: -50px;
 }
